@@ -1,5 +1,5 @@
-# Dynamic Physician Allocation in Emergency Department: Experimental Data & Results  
-This repository contains experimental data and solution results supporting the paper **"Dynamic Physician Allocation in Emergency Departments among different rooms with Uncertain Patient Arrivals"** 
+# Dynamic Physician Scheduling in Emergency Department: Experimental Data & Results  
+This repository contains experimental data and solution results supporting the paper **"Dynamic Physician Scheduling in Emergency Departments among Different Rooms with Uncertain Patient Arrivals"** 
 ## Repository Structure  
 The repository is organized into two main directories: `data` (experimental input data) and `solution_results` (detailed results), corresponding to the numerical experiments in the paper.  
 
