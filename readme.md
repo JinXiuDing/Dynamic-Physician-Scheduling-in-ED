@@ -1,29 +1,57 @@
 # Dynamic Physician Scheduling in Emergency Department: Experimental Data & Results  
 This repository contains experimental data and solution results supporting the paper **"Dynamic Physician Scheduling in Emergency Departments among Different Rooms with Uncertain Patient Arrivals"** 
 ## Repository Structure  
-The repository is organized into two main directories: `data` (experimental input data) and `solution_results` (detailed results), corresponding to the numerical experiments in the paper.  
+The repository is organized into two main directories: `data` (experimental input data) and `solution_results` (detailed results), corresponding to the numerical experiments in the paper. 
 
+## 1. Data Directory (`data/`)
+This directory contains all input parameters and raw experimental data in standardized Excel (.xlsx) format. Each Excel file corresponds to one experiment type in Section 6, with one worksheet per test case; the sheet name is the case name (e.g., `case_2022-12-25`).
 
-### 1. Data Directory (`data/`)  
-This directory contains input parameters and raw data for all numerical experiments, categorized into subdirectories aligned with the paper’s experiment sections (Section 6: Numerical Experiments):  
+All files follow a unified table format:
+- Each row represents one parameter field. The definition of each field is listed in the table below.
+- Columns `v1–v24` represent values for 24 consecutive periods (1 hour per period).
+- Time-invariant parameters (e.g., service rates) that remain fixed for the entire decision horizon are entered only in column `v1`.
 
-- **`small_scale_instance/`**  
-  Contains 10 text files named `case_<number>.txt` (e.g., `case_1.txt`), corresponding to the small-scale test instances in **Section 6.2 (Small-Scale Instance Experiments)**. Each file includes parameters such as: the number of periods (\( T \)), physician counts in each period (\( N_t \)), patient arrival rates in each period (\( lam0, lam1 \)), service rates (\( mu_0, mu_1 \)), cost coefficients (\( c_0, c_1, p_0, p_1 \)), capacity limits (\( \bar{q}_0, \bar{q}_1 \)), initial patient counts in the system (\( q0_initial, q1_initial \)), and maximum patient count limits (\( q0_max, q1_max \)).  
+### Unified Data Field Definitions
+| Field             | Meaning                                                                 |
+|--------------------|-------------------------------------------------------------------------|
+| T                  | Total number of periods    |
+| lam0               | Actual arrival rate of critical patients per period                      |
+| lam1               | Actual arrival rate of mild patients per period                          |
+| forecast_lam0      | MLR-OL method predicted arrival rate of critical patients per period             |
+| forecast_lam1      | MLR-OL method predicted arrival rate of mild patients per period                 |
+| history_lam0       | Moving average (MA) method predicted arrival rate of critical patients per period |
+| history_lam1       | Moving average (MA) method predicted arrival rate of mild patients per period     |
+| mu0                | Physician service rate in resuscitation room    |
+| mu1                | Physician service rate in general consultation rooms              |
+| c0                 | Unit time LOS cost for each critical patient                                 |
+| c1                 | Unit time LOS cost for each mild patient                                   |
+| p0                 | Additional unit time penalty when the number of critical patients exceeds capacity limit|
+| p1                 | Additional unit time penalty when the number of mild patients exceeds capacity limit   |
+| q0_hat             | Capacity limit for the number of critical patients in the system                      |
+| q1_hat             | Capacity limit for the number of mild patients in the system                       |
+| q0_initial         | Initial number of critical patients in the system                       |
+| q1_initial         | Initial number of mild patients in the system                           |
+| q0_max             | State space upper bound for critical patients       |
+| q1_max             | State space upper bound for mild patients            |
+| N_t                | Number of available physicians in each period                             |
 
-- **`non-epidemic_phase/`**  
-  Contains 10 text files named `case_<date>.txt` (e.g., `case_2022-08-10.txt`), corresponding to real ED data from the non-epidemic period in **Section 6.3 (Non-epidemic Phase Experiment)**. These files include the same parameters as those in the `small_scale_instance/` directory, plus additional data such as: forecast patient arrival rates via moving average (\( history_lam0, history_lam1 \)), forecast patient arrival rates via MLR-OL (\( forecast_lam0, forecast_lam1 \)), and physician shift schedules.  
+### Excel File Details
+- **`small_scale_instances.xlsx`**
+10 test cases for **Section 6.2 (Small-Scale Instance Experiments)**. 
 
-- **`epidemic_phase/`**  
-  Contains 10 text files named `case_<date>.txt` (e.g., `case_2022-12-25.txt`), corresponding to real ED data from the epidemic period in **Section 6.4 (Epidemic Phase Experiment)**. These files include the same parameters as those in the `non-epidemic_phase/` directory.  
+- **`non-epidemic_phase.xlsx`**
+  10 real ED cases for **Section 6.3 (Non-epidemic Phase Experiment)**. 
 
-- **`sensitivity_analysis_instances/`**  
-  Contains 105 text files for **Section 6.5 (Sensitivity Analysis)**, including:  
-  - 5 baseline files (`case_<date>.txt`) with unmodified parameters.  
-  - 25 files with 5 different values for the LOS cost coefficient \( c_0 \) (`case_<date>c0_<value>.txt`).  
-  - 25 files with 5 different values for the penalty cost coefficient \( p_0 \) (`case_<date>p0_<value>.txt`).  
-  - 25 files with 5 different values for the critical patient capacity limit \( \bar{q}_0 \) (`case_<date>q0_hat_<value>.txt`).  
-  - 25 files with 5 different values for the mild patient capacity limit \( \bar{q}_1 \) (`case_<date>q1_hat_<value>.txt`).  
+- **`epidemic_phase.xlsx`**
+  10 real ED cases for **Section 6.4 (Epidemic Phase Experiment)**. 
 
+- **`sensitivity_analysis_instances.xlsx`**
+  105 cases for **Section 6.5 (Sensitivity Analysis)**, including: 
+  - 5 baseline cases (unchanged parameters)
+  - 25 cases with varied critical patient waiting cost *c₀*
+  - 25 cases with varied critical patient penalty cost *p₀*
+  - 25 cases with varied critical patient capacity limit *q̅₀*
+  - 25 cases with varied mild patient capacity limit *q̅₁*
 
 ### 2. Solution Results Directory (`solution_results/`)  
 This directory contains detailed experimental results in Excel files, matching the structure of the `data` directory:  
