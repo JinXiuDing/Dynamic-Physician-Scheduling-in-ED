@@ -29,8 +29,8 @@ All files follow a unified table format:
 | p1                 | Additional unit time penalty when the number of mild patients exceeds capacity limit   |
 | q0_hat             | Capacity limit for the number of critical patients in the system                      |
 | q1_hat             | Capacity limit for the number of mild patients in the system                       |
-| q0_initial         | Initial number of critical patients in the system                       |
-| q1_initial         | Initial number of mild patients in the system                           |
+| q0_initial         | Initial number of critical patients in the system at the beginning of period 0                      |
+| q1_initial         | Initial number of mild patients in the system at the beginning of period 0                      |
 | q0_max             | State space upper bound for critical patients       |
 | q1_max             | State space upper bound for mild patients            |
 | N_t                | Number of available physicians in each period                             |
