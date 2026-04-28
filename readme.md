@@ -69,9 +69,22 @@ This directory contains detailed experimental results in Excel files, matching t
 - **`epidemic_phase.xlsx`**  
   Results for **Section 6.4**. Structured identically to `non-epidemic_phase.xlsx`, with results for the same methods during the epidemic phase.  
 
-- **`sensitivity_analysis.xlsx`**  
-  Results for **Section 6.5**. Columns include:  
+- **`sensitivity_analysis_1.xlsx`**  
+  Results for **Section 6.5.1**. Columns include:  
   - `Date`: Base date of the instance.  
   - `Parameter Setting`: Modified parameter values (e.g., \( c_0=2 \)) or "baseline instance" for unmodified parameters.  
-  - `BI1` and `Gcμ`: Expected costs for the proposed method and the benchmark gcμ rule.  
+  - `BI1` and `Gcμ`: Expected costs for the proposed method and the gcμ rule.  
   - Bold rows show average results across five instances for each parameter setting.
+
+- **`sensitivity_analysis_2.xlsx`**  
+  Results for **Section 6.5.2**.  
+  Columns include:
+  - `Parameter`: The cost parameter being perturbed (e.g., `c_0`, `p_1`, `$\hat{q}_1$`) or `"baseline instance"` for unmodified parameters.
+  - `Variation`: Percentage change from the baseline value (e.g., `+20%`, `-10%`); `0%` denotes the baseline parameter combination.
+  - `Date`: Base date of the corresponding instance.
+  - `BI1_NC`: Average expected cost obtained by re-optimizing with BI1 under the current perturbed parameter combination.
+  - `BI1_BC`: Average expected cost when applying the policy derived under the baseline parameter combination directly to the current perturbed parameter combination.
+  - `Cost Change`: Impact of parameter variation on system cost, calculated as `(BI1_NC - BI1_base) / BI1_base`, where `BI1_base` is the expected cost of the policy obtained by BI1 method under the baseline parameter combination.
+  - `Loss Rate`: Robustness measure of the baseline policy under parameter deviations, calculated as `(BI1_BC - BI1_NC) / BI1_NC`.
+  - Bold rows show average results across five instances for each parameter variation setting.
+
